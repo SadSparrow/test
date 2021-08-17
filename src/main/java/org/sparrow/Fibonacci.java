@@ -11,6 +11,9 @@ public class Fibonacci {
 
     //Получение n первых чисел Фибоначчи ==========================
     public static int[] getArray(int n) {
+        if (n <= 1) {
+            return new int[]{0};
+        }
         int[] arr = new int[n];
         arr[0] = 0;
         arr[1] = 1;
@@ -68,12 +71,33 @@ public class Fibonacci {
 
     //Получение суммы n первых чисел
     //для int - первые 46 чисел, для long первые 91, затем переполнение :(
-    //допишу метод
+    public static int getSum(int n) {
+        if (n <= 1) {
+            return 0;
+        }
+        if (n == 2) {
+            return 1;
+        }
+
+        int sum = 2;
+        int a = 1;
+        int b = 1;
+
+        for (int i = 3; i < n; i++) {
+            int fibonacci = a + b;
+            sum += fibonacci;
+            a = b;
+            b = fibonacci;
+        }
+
+        return sum;
+    }
 
     public static void main(String[] args) {
         System.out.println(Arrays.toString(getArray(10)));
         System.out.println(getValue(9));
         System.out.println(calculateWithFor(10));
         System.out.println(calculateRecursiveBad(10));
+        System.out.println(getSum(3));
     }
 }
